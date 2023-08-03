@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { LocalStorage } from 'node-localstorage';
 import { Command, Option } from 'commander';
 import dotenv from 'dotenv';
