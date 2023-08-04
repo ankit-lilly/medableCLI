@@ -22,7 +22,11 @@ try {
   dotenv.config({ path: envFilePath });
 
   const program = new Command();
-  program.description('A CLI to interact with Medable Cortex Database');
+  program.description(`A CLI to interact with Medable Cortex Database\n
+
+     Run 'medable login' to login to your Medable account and get started.
+
+    `);
   program.version('0.0.1');
 
   program
@@ -30,9 +34,7 @@ try {
     .addOption(new Option('-u, --username <string>', 'username').env('username'))
     .addOption(new Option('-p, --password <string>', 'password').env('password'))
     .addOption(new Option('-o, --org <string>', 'Medable org').env('org'))
-    .addOption(
-      new Option('-k, --apiKey <string>', 'medable_client_dev_key').env('apiKey'),
-    )
+    .addOption(new Option('-k, --apiKey <string>', 'medable_client_dev_key').env('apiKey'))
     .action((opts) => {
       const { username, password, org, apiKey } = opts;
       MedableClient.login({ username, password, org, apiKey }).catch(handleError);
@@ -80,13 +82,6 @@ try {
     .option('-i, --include <string>', 'Common separated list of fields to include')
     .option('-p, --paths <string>', 'Comma separated list of paths to include')
     .action((opts, cmd) => {
-      const isTokenValid = MedableClient.isTokenValid();
-      if (!isTokenValid) {
-        console.log('Token is not valid, please login');
-        program.help();
-        return;
-      }
-
       const { limit, skip, where, expand, include, paths } = cmd;
       const client = MedableClient.getClient();
       client

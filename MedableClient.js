@@ -3,7 +3,9 @@ import MedableOauthClient from './auth/MedableOauthClient.js';
 import MedableHttpClient from './auth/MedableHttpClient.js';
 
 class MedableClient {
-  static isTokenValid(token) {
+  static isTokenValid() {
+    const org = localStorage.getItem('activeOrg');
+    const token = localStorage.getItem(org);
     if (!token) {
       return false;
     }
