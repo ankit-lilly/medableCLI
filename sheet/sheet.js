@@ -1,6 +1,5 @@
 import Excel from 'exceljs';
 import open from 'open';
-import _ from 'lodash';
 
 class Sheet {
   constructor(name) {
@@ -21,6 +20,10 @@ class Sheet {
     this.workbook = workbook;
     this.sheet = sheet;
     this.columns = [];
+  }
+
+  _capitalize(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
   }
 
   addColumns({
@@ -69,7 +72,7 @@ class Sheet {
         key: s,
         header: s
           ?.split('_')
-          ?.map((s) => _.capitalize(s))
+          ?.map((s) => this._capitalize(s))
           ?.join(' '),
       })),
     );

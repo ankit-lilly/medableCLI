@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import { LocalStorage } from 'node-localstorage';
 import { Command, Option } from 'commander';
 import dotenv from 'dotenv';
@@ -7,6 +8,7 @@ import fs from 'node:fs/promises';
 import { homedir } from 'os';
 import { join } from 'path';
 import MedableClient from './MedableClient.js';
+import Transformer from './Transformer.js';
 
 const handleError = (err) => {
   process.env.DEBUG && console.error(err);
@@ -81,11 +83,28 @@ try {
     .option('-e, --expand <string>', 'Comma separated list of fields to expand')
     .option('-i, --include <string>', 'Common separated list of fields to include')
     .option('-p, --paths <string>', 'Comma separated list of paths to include')
+    .option('-m, --map <string>', 'Map function')
+    .option('-f, --filter <string>', 'Filter function')
+    .option('--find <string>', 'Find function')
     .action((opts, cmd) => {
-      const { limit, skip, where, expand, include, paths } = cmd;
+      const { limit, skip, where, expand, include, paths, map, filter, find } = cmd;
       const client = MedableClient.getClient();
       client
         .getObject(opts, { params: { limit, where, skip, expand, include, paths } })
+        .then((res) => {
+          let data = res.data;
+
+          if (map) {
+            data = Transformer.map(data, map);
+          }
+          if (filter) {
+            data = Transformer.filter(data, filter);
+          }
+          if (find) {
+            data = Transformer.find(data, find);
+          }
+          return data;
+        })
         .then(JSON.stringify)
         .then(console.log)
         .catch(handleError);
@@ -105,6 +124,7 @@ try {
 
     fs.readFile(opts, 'utf-8')
       .then(runScript)
+      .then((r) => r.data)
       .then(JSON.stringify)
       .then(console.log)
       .catch(handleError);
