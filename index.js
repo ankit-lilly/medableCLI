@@ -89,7 +89,6 @@ try {
     .action((opts, cmd) => {
       const { limit, skip, where, expand, include, paths, map, filter, find } = cmd;
       const client = MedableClient.getClient();
-      const sheet = new Sheet('1Z8Z.xlsx');
       client
         .getObject(opts, { params: { limit, where, skip, expand, include, paths } })
         .then((res) => {
