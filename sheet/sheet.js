@@ -1,5 +1,4 @@
 import Excel from 'exceljs';
-import open from 'open';
 
 class Sheet {
   constructor(name) {
@@ -81,10 +80,6 @@ class Sheet {
 
     await this.save();
     return this.name;
-  }
-
-  async open() {
-    open(this.name);
   }
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "medable",
+  "name": "medable-cli",
   "version": "0.0.1",
   "main": "index.js",
   "type": "module",
@@ -7,7 +7,7 @@
     "node": ">=16.x"
   },
   "bin": {
-    "medable": "./index.js"
+    "mcli": "./index.js"
   },
   "scripts": {
     "clearSession": "npx rimraf .tokens",
