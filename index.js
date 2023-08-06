@@ -9,7 +9,6 @@ import { homedir } from 'os';
 import { join } from 'path';
 import MedableClient from './MedableClient.js';
 import Transformer from './Transformer.js';
-import Sheet from './sheet/sheet.js';
 
 const handleError = (err) => {
   process.env.DEBUG && console.error(err);
@@ -107,18 +106,6 @@ try {
           }
           return data;
         })
-        .then((data) => {
-          if (data.length) {
-            sheet.addColumns(Object.keys(data[0]));
-            data.forEach((row) => {
-              sheet.addRow(row);
-            });
-            console.log('Saving sheet');
-            return sheet.save();
-          }
-          return data;
-        })
-
         .then(JSON.stringify)
         .then(console.log)
         .catch(handleError);
