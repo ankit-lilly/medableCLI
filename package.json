@@ -1,10 +1,10 @@
 {
   "name": "medable-cli",
-  "version": "0.3.1",
+  "version": "0.4.1",
   "main": "index.js",
   "type": "module",
   "engines": {
-    "node": ">=16.x"
+    "node": "18.x"
   },
   "bin": {
     "mcli": "./index.js"
