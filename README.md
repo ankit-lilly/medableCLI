@@ -5,8 +5,8 @@ CLI tool to interact with Medable Cortex API
 # How to run it?
 
 ```
-    npm install -g medable
-    medable --help
+    npm install -g medable-cli
+    mcli --help
 ```
 
 
@@ -19,9 +19,20 @@ CLI tool to interact with Medable Cortex API
     apiKey=keydfkjk
   ```
 
-- Run medable login to login
+- Run `mcli login` to login
 
 - It should generate a token and log you in and then you should be able to run rest of commands like get,run and scripts download
+
+
+You can also pass transformation functions to `mcli get object`. This can be any valid javascript function.
+
+For instance, if you want to find user with c_number 5 then you could do something like this:
+
+```
+mcli get c_public_users --find "(item) => item.c_number === 5"
+
+```
+
 
 
 
