@@ -25,9 +25,7 @@ try {
 
   const program = new Command();
   program.description(`A CLI to interact with Medable Cortex Database\n
-
      Run 'medable login' to login to your Medable account and get started.
-
     `);
   program.version('0.0.1');
 
@@ -86,6 +84,7 @@ try {
     .option('-m, --map <string>', 'Map function')
     .option('-f, --filter <string>', 'Filter function')
     .option('--find <string>', 'Find function')
+    .option('--all', 'Get all objects')
     .action((opts, cmd) => {
       const { limit, skip, where, expand, include, paths, map, filter, find } = cmd;
       const client = MedableClient.getClient();
