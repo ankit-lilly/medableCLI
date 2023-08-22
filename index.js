@@ -86,6 +86,7 @@ try {
     .option('--find <string>', 'Find function')
     .option('--all', 'Get all objects')
     .action((opts, cmd) => {
+      console.log(opts);
       const { limit, skip, where, expand, include, paths, map, filter, find } = cmd;
       const client = MedableClient.getClient();
       client
@@ -93,14 +94,15 @@ try {
         .then((res) => {
           let data = res.data;
 
-          if (map) {
-            data = Transformer.map(data, map);
-          }
           if (filter) {
             data = Transformer.filter(data, filter);
           }
           if (find) {
             data = Transformer.find(data, find);
+          }
+
+          if (map) {
+            data = Transformer.map(data, map);
           }
           return data;
         })
