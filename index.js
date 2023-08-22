@@ -90,7 +90,6 @@ try {
     .option('--find <string>', 'Find function')
     .option('--all', 'Get all objects')
     .action((opts, cmd) => {
-      console.log(opts);
       const { limit, skip, where, expand, include, paths, map, filter, find } = cmd;
       const client = MedableClient.getClient();
       client
