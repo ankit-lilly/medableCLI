@@ -3,7 +3,7 @@
 import { LocalStorage } from 'node-localstorage';
 import { Command, Option } from 'commander';
 import dotenv from 'dotenv';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import fs from 'node:fs/promises';
 import { homedir } from 'os';
 import { join } from 'path';
@@ -28,10 +28,8 @@ try {
      Run 'medable login' to login to your Medable account and get started.
     `);
 
-  const pck = JSON.parse(readFileSync('./package.json', 'utf-8'));
-
   
-  program.version(pck.version);
+  program.version("0.0.3");
 
   program
     .command('login')
