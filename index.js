@@ -3,7 +3,7 @@
 import { LocalStorage } from 'node-localstorage';
 import { Command, Option } from 'commander';
 import dotenv from 'dotenv';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import fs from 'node:fs/promises';
 import { homedir } from 'os';
 import { join } from 'path';
@@ -27,7 +27,11 @@ try {
   program.description(`A CLI to interact with Medable Cortex Database\n
      Run 'medable login' to login to your Medable account and get started.
     `);
-  program.version('0.0.1');
+
+  const pck = JSON.parse(readFileSync('./package.json', 'utf-8'));
+
+  
+  program.version(pck.version);
 
   program
     .command('login')
