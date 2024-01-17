@@ -9,6 +9,7 @@ import { homedir } from 'os';
 import { join } from 'path';
 import MedableClient from './MedableClient.js';
 import Transformer from './Transformer.js';
+import { pickNestedProperties } from './utils.js';
 
 const handleError = (err) => {
   process.env.DEBUG && console.error(err);
@@ -28,8 +29,7 @@ try {
      Run 'medable login' to login to your Medable account and get started.
     `);
 
-  
-  program.version("0.0.3");
+  program.version('0.0.4');
 
   program
     .command('login')
@@ -84,11 +84,12 @@ try {
     .option('-i, --include <string>', 'Common separated list of fields to include')
     .option('-p, --paths <string>', 'Comma separated list of paths to include')
     .option('-m, --map <string>', 'Map function')
+    .option('--pick <string>', 'list of properties to pick')
     .option('-f, --filter <string>', 'Filter function')
     .option('--find <string>', 'Find function')
     .option('--all', 'Get all objects')
     .action((opts, cmd) => {
-      const { limit, skip, where, expand, include, paths, map, filter, find } = cmd;
+      const { limit, skip, where, expand, include, paths, map, filter, find, pick } = cmd;
       const client = MedableClient.getClient();
       client
         .getObject(opts, { params: { limit, where, skip, expand, include, paths } })
@@ -104,6 +105,10 @@ try {
 
           if (map) {
             data = Transformer.map(data, map);
+          }
+
+          if (pick) {
+            data = pickNestedProperties(data, pick);
           }
           return data;
         })
