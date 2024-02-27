@@ -20,7 +20,7 @@ try {
      Run 'medable login' to login to your Medable account and get started.
     `);
 
-  program.version('0.0.5');
+  program.version('0.0.6');
 
   setupCommands(program);
 
