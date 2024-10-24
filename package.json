@@ -1,10 +1,10 @@
 {
   "name": "medable-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "index.js",
   "type": "module",
   "engines": {
-    "node": "18.x"
+    "node": "23.x"
   },
   "bin": {
     "mcli": "./index.js"
@@ -18,16 +18,16 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "commander": "^11.0.0",
-    "dotenv": "^16.3.1",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
     "exceljs": "^4.4.0",
-    "got": "^12.5.3",
+    "got": "^14.4.3",
     "json2csv": "^6.0.0-alpha.2",
-    "jsonwebtoken": "^9.0.1",
-    "node-localstorage": "^2.2.1",
-    "tough-cookie": "^4.1.2"
+    "jsonwebtoken": "^9.0.2",
+    "node-localstorage": "^3.0.5",
+    "tough-cookie": "^5.0.0"
   },
   "devDependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.4.5"
   }
 }
